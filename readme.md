@@ -72,7 +72,8 @@ fawryClient.charge({
 fawryClient.refund({
   merchantCode: '<merchant_code>',
   referenceNumber: '931337410',
-  refundAmount: 81.13
+  refundAmount: 81.13,
+  reason: 'Paid manually'
 });
 
 /*
