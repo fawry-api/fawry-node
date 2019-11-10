@@ -8,7 +8,6 @@ const BASE_URL = 'https://www.atfawry.com';
 const SANDBOX_BASE_URL = 'https://atfawry.fawrystaging.com';
 
 const getUrl = isSandbox => (isSandbox ? SANDBOX_BASE_URL : BASE_URL) + API_PATH;
-const formatAmount = amount => amount.toFixed(2);
 const getSignature = (...strings) => {
 	return crypto
 		.createHash('sha256')
@@ -78,15 +77,22 @@ const init = config => {
 			});
 		},
 
-		status: params => {
+		status: (params = {}) => {
+			const schema = require('./contracts/status');
+			const {error, value} = schema.validate(params);
+
+			if (error) {
+				throw error;
+			}
+
 			const signature = getSignature(
-				params.merchantCode,
-				params.merchantRefNumber,
+				value.merchantCode,
+				value.merchantRefNumber,
 				fawrySecureKey
 			);
 
 			return request.get('status', {
-				...params,
+				...value,
 				signature
 			});
 		}
