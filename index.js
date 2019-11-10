@@ -13,7 +13,7 @@ const getUrl = isSandbox => (isSandbox ? SANDBOX_BASE_URL : BASE_URL) + API_PATH
 const getSignature = (...strings) => {
 	return crypto
 		.createHash('sha256')
-		.update(strings.join(strings, ''))
+		.update(strings.join(''))
 		.digest('hex');
 };
 
