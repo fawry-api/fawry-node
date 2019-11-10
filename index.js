@@ -56,17 +56,24 @@ const init = config => {
 			});
 		},
 
-		refund: data => {
+		refund: (data = {}) => {
+			const schema = require('./contracts/refund');
+			const {error, value} = schema.validate(data);
+
+			if (error) {
+				throw error;
+			}
+
 			const signature = getSignature(
-				data.merchantCode,
-				data.referenceNumber,
-				formatAmount(data.refundAmount),
-				data.reason,
+				value.merchantCode,
+				value.referenceNumber,
+				value.refundAmount,
+				value.reason,
 				fawrySecureKey
 			);
 
 			return request.post('refund', {
-				...data,
+				...value,
 				signature
 			});
 		},
