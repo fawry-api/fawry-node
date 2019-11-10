@@ -7,12 +7,12 @@ const schema = Joi.object({
 	amount: Joi.number().precision(2).required(),
 	description: Joi.string().required(),
 	customerMobile: Joi.string().required(),
-	chargeItems: [{
+	chargeItems: Joi.array().items({
 		itemId: Joi.string().required(),
 		description: Joi.string().required(),
 		price: Joi.number().precision(2).required(),
 		quantity: Joi.number().integer().required()
-	}],
+	}),
 
 	currencyCode: Joi.string(),
 	cardToken: Joi.string(),
