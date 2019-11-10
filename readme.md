@@ -37,9 +37,9 @@ fawry.validateCallbackParams({
     merchantRefNumber: '9708f1cea8b5426cb57922df51b7f790',
     customerMobile: '01004545545',
     customerMail: 'fawry@fawry.com',
-    paymentAmount: 152.00,
-    orderAmount: 150.00,
-    fawryFees: 2.00,
+    paymentAmount: '152.00',
+    orderAmount: '150.00',
+    fawryFees: '2.00',
     shippingFees: '',
     orderStatus: 'NEW',
     paymentMethod: 'PAYATFAWRY',
@@ -47,7 +47,7 @@ fawry.validateCallbackParams({
     orderExpiryDate: 1533554719314,
     orderItems: [{
       itemCode: 'e6aacbd5a498487ab1a10ae71061535d',
-      price: 150.00,
+      price: '150.00',
       quantity: 1
     }]
   }
@@ -82,12 +82,12 @@ fawryClient.charge({
   customerMobile: '012345678901',
   paymentMethod: 'PAYATFAWRY',
   currencyCode: 'EGP',
-  amount: 17.20,
+  amount: '17.20',
   description: 'the charge request description',
   chargeItems: [{
     itemId: 'fk3fn9flk8et9a5t9w3c5h3oc684ivho',
     description: 'desc',
-    price: 17.20,
+    price: '17.20',
     quantity: 1
   }]
 });
@@ -101,7 +101,7 @@ fawryClient.charge({
 fawryClient.refund({
   merchantCode: '<merchant_code>',
   referenceNumber: '931337410',
-  refundAmount: 81.13,
+  refundAmount: '81.13',
   reason: 'Paid manually'
 });
 

@@ -1,9 +1,10 @@
 const Joi = require('@hapi/joi');
+const {amountRegex} = require('./patterns');
 
 const schema = Joi.object({
 	merchantCode: Joi.string().required(),
 	referenceNumber: Joi.string().required(),
-	refundAmount: Joi.number().precision(2).required(),
+	refundAmount: Joi.string().pattern(amountRegex, 'money').required(),
 	reason: Joi.string().required()
 });
 
