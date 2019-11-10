@@ -16,10 +16,16 @@ const getSignature = (...strings) => {
 		.digest('hex');
 };
 
-const init = ({
-	fawrySecureKey,
-	isSandbox = false
-} = {}) => {
+const init = config => {
+	const {fawrySecureKey, isSandbox = false} = config;
+
+	const schema = require('./contracts/init');
+	const {error} = schema.validate(config);
+
+	if (error) {
+		throw error;
+	}
+
 	const request = axios.create({
 		baseURL: getUrl(isSandbox)
 	});
