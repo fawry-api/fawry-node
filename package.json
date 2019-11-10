@@ -1,6 +1,6 @@
 {
 	"name": "fawry-node",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "A plug-and-play library to interface with Fawry's payment gateway API (charge, refund, payment status, service callback).",
 	"license": "MIT",
 	"repository": "fawry-api/fawry-node",
