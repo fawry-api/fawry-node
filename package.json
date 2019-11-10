@@ -25,7 +25,8 @@
 	],
 	"dependencies": {
 		"@hapi/joi": "^16.1.7",
-		"axios": "^0.19.0"
+		"axios": "^0.19.0",
+		"query-string": "^6.8.3"
 	},
 	"devDependencies": {
 		"ava": "^2.1.0",

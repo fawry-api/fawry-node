@@ -3,6 +3,7 @@
 const crypto = require('crypto');
 const axios = require('axios');
 const Joi = require('@hapi/joi');
+const queryString = require('query-string');
 
 const API_PATH = '/ECommerceWeb/Fawry/payments/';
 const BASE_URL = 'https://www.atfawry.com';
@@ -52,7 +53,8 @@ const init = config => {
 	}
 
 	const request = axios.create({
-		baseURL: getUrl(isSandbox)
+		baseURL: getUrl(isSandbox),
+		paramsSerializer: params => queryString.stringify(params, {encode: false})
 	});
 
 	return {
@@ -118,8 +120,10 @@ const init = config => {
 			);
 
 			return request.get('status', {
-				...value,
-				signature
+				params: {
+					...value,
+					signature
+				}
 			});
 		}
 	};
