@@ -30,6 +30,9 @@
 		"nyc": "^14.1.1",
 		"xo": "^0.24.0"
 	},
+	"peerDependencies": {
+		"axios": "0.x"
+	},
 	"nyc": {
 		"reporter": [
 			"lcov",
