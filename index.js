@@ -26,19 +26,26 @@ const init = ({
 
 	return {
 		request,
-		charge: data => {
+		charge: (data = {}) => {
+			const schema = require('./contracts/charge');
+			const {error, value} = schema.validate(data);
+
+			if (error) {
+				throw error;
+			}
+
 			const signature = getSignature(
-				data.merchantCode,
-				data.merchantRefNum,
-				data.customerProfileId,
-				data.paymentMethod,
-				formatAmount(data.amount),
-				data.cardToken || '',
+				value.merchantCode,
+				value.merchantRefNum,
+				value.customerProfileId,
+				value.paymentMethod,
+				value.amount,
+				value.cardToken || '',
 				fawrySecureKey
 			);
 
 			return request.post('charge', {
-				...data,
+				...value,
 				signature
 			});
 		},

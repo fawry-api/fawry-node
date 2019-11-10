@@ -23,7 +23,9 @@
 		"fawry-api",
 		"fawry-node"
 	],
-	"dependencies": {},
+	"dependencies": {
+		"@hapi/joi": "^16.1.7"
+	},
 	"devDependencies": {
 		"ava": "^2.1.0",
 		"codecov": "^3.5.0",
