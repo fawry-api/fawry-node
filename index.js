@@ -2,6 +2,7 @@
 
 const crypto = require('crypto');
 const axios = require('axios');
+const Joi = require('@hapi/joi');
 
 const API_PATH = '/ECommerceWeb/Fawry/payments/';
 const BASE_URL = 'https://www.atfawry.com';
@@ -13,6 +14,31 @@ const getSignature = (...strings) => {
 		.createHash('sha256')
 		.update(strings.join(strings, ''))
 		.digest('hex');
+};
+
+const validateCallbackParams = ({fawrySecureKey, params} = {}) => {
+	const signature = getSignature(
+		params.fawryRefNumber,
+		params.merchantRefNum,
+		params.paymentAmount,
+		params.orderAmount,
+		params.orderStatus,
+		params.paymentMethod,
+		params.paymentRefrenceNumber,
+		fawrySecureKey
+	);
+
+	const {error} = Joi.assert(
+		signature,
+		Joi.valid(params.messageSignature),
+		'Invalid Signature'
+	);
+
+	if (error) {
+		throw error;
+	}
+
+	return params;
 };
 
 const init = config => {
@@ -100,5 +126,6 @@ const init = config => {
 };
 
 module.exports = {
-	init
+	init,
+	validateCallbackParams
 };

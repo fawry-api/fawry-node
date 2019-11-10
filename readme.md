@@ -18,11 +18,40 @@ Please make sure to add to your project one of the supported above modules.
 $ npm install fawry-node
 ```
 
-
 ## Usage
 
 ```js
 const fawry = require('fawry-node');
+
+/*
+  params: the object you got at the callback context
+  does: throws an error if messageSignature doesn't match the generated one using your secure key
+  return: insertedParams if falid
+*/
+
+fawry.validateCallbackParams({
+  fawrySecureKey: '<fawry_secure_key>',
+  params: {
+    requestId: 'c72827d084ea4b88949d91dd2db4996e',
+    fawryRefNumber: '970177',
+    merchantRefNumber: '9708f1cea8b5426cb57922df51b7f790',
+    customerMobile: '01004545545',
+    customerMail: 'fawry@fawry.com',
+    paymentAmount: 152.00,
+    orderAmount: 150.00,
+    fawryFees: 2.00,
+    shippingFees: '',
+    orderStatus: 'NEW',
+    paymentMethod: 'PAYATFAWRY',
+    messageSignature: 'b0175565323e464b01dc9407160368af5568196997fb6e379374a4f4fbbcf587',
+    orderExpiryDate: 1533554719314,
+    orderItems: [{
+      itemCode: 'e6aacbd5a498487ab1a10ae71061535d',
+      price: 150.00,
+      quantity: 1
+    }]
+  }
+});
 
 /*
   params: config * for details check contracts/init.js
